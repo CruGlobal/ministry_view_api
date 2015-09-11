@@ -11,7 +11,7 @@ class MinistryViewController < ApplicationController
   end
 
   def profiles
-    service = params[:service_uri] || 'https://tntdataserver.eu/dataserver/uk/dataquery/dataqueryservice.asmx'
+    service = params[:portal_uri]
     dqs = DataQueryService.new(service)
     res = dqs.profiles(session[:cas_pgt])
 
