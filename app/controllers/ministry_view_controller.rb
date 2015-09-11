@@ -10,6 +10,7 @@ class MinistryViewController < ApplicationController
     render json: PortalUsersService.new.countries(guid).to_json
   end
 
+
   private
 
   def cas_filter

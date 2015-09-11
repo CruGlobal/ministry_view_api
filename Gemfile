@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'rails-api'
+# gem 'rails-api'
 gem 'spring', :group => :development
 gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git'
 gem 'bcrypt', '~> 3.1.7'
