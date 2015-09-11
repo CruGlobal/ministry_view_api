@@ -1,0 +1,3 @@
+[submodule "public/mv"]
+	path = public/mv
+	url = git@github.com:GlobalTechnology/ministry-view-reports.git
