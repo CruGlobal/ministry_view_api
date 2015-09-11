@@ -2,8 +2,10 @@ require 'savon'
 
 class DataQueryService
 
-  def initialize(service)
+  def initialize(service, guid, pgt)
     @service = service.sub('dataqueryservice.asmx', 'dataqueryservice2.asmx')
+    @guid = guid
+    @pgt = pgt
   end
 
   def client
@@ -16,8 +18,8 @@ class DataQueryService
     end
   end
 
-  def login(pgt)
-    proxy_ticket = RubyCAS::Filter.client.request_proxy_ticket(pgt, @service)
+  def session_id
+    proxy_ticket = RubyCAS::Filter.client.request_proxy_ticket(@pgt, @service)
     res = client.call(
       :auth_login,
       message: {
@@ -28,20 +30,37 @@ class DataQueryService
     )
 
     Rails.logger.debug(res.to_hash)
-    res.to_hash
+    res.to_hash[:auth_login_response][:auth_login_result][:session_id]
   end
 
-  def profiles(pgt)
-    session_id = login(pgt)[:auth_login_response][:auth_login_result][:session_id]
-    Rails.logger.debug(session_id)
+  def profiles
+    Rails.cache.fetch(['v1', @guid, 'profiles']) do
+      res = client.call(
+        :my_web_user_get_info,
+        message: {
+          session_i_d: session_id
+        }
+      )
 
-    res = client.call(
-      :my_web_user_get_info,
-      message: {
-        session_i_d: session_id
-      }
-    )
+      Array.wrap(res.to_hash[:my_web_user_get_info_response][:my_web_user_get_info_result][:staff_profiles][:staff_profile_info])
+    end
+  end
 
-    Array.wrap(res.to_hash[:my_web_user_get_info_response][:my_web_user_get_info_result][:staff_profiles][:staff_profile_info])
+  def transactions(profile_code, date_from, date_to, account)
+    Rails.cache.fetch(['v2', @guid, profile_code, date_from, date_to, account, 'transactions']) do
+      res = client.call(
+        :staff_portal_get_financial_transactions,
+        message: {
+          session_i_d: session_id,
+          staff_profile_code: profile_code,
+          date_from: date_from,
+          date_to: date_to,
+          financial_account_filter: account,
+          mark_as_published: false
+        }
+      )
+
+      res.to_hash[:staff_portal_get_financial_transactions_response][:staff_portal_get_financial_transactions_result][:financial_transactions][:financial_transaction]
+    end
   end
 end

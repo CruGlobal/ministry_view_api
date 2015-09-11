@@ -6,14 +6,22 @@ class MinistryViewController < ApplicationController
   end
 
   def countries
-    guid = session['cas_extra_attributes']['ssoGuid']
     render json: PortalUsersService.new.countries(guid).to_json
   end
 
   def profiles
-    service = params[:portal_uri]
-    dqs = DataQueryService.new(service)
-    res = dqs.profiles(session[:cas_pgt])
+    res = data_query_service.profiles
+
+    render json: res.to_json
+  end
+
+  def transactions
+    res = data_query_service.transactions(
+      params[:profile_code],
+      params[:date_from],
+      params[:date_to],
+      params[:account]
+    )
 
     render json: res.to_json
   end
@@ -22,5 +30,13 @@ class MinistryViewController < ApplicationController
 
   def cas_filter
     RubyCAS::Filter.filter(self)
+  end
+
+  def guid
+    session['cas_extra_attributes']['ssoGuid']
+  end
+
+  def data_query_service
+    DataQueryService.new(params[:portal_uri], guid, session[:cas_pgt])
   end
 end
