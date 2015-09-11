@@ -47,7 +47,7 @@ class DataQueryService
   end
 
   def transactions(profile_code, date_from, date_to, account)
-    Rails.cache.fetch(['v2', @guid, profile_code, date_from, date_to, account, 'transactions']) do
+    Rails.cache.fetch(['v3', @guid, profile_code, date_from, date_to, account, 'transactions']) do
       res = client.call(
         :staff_portal_get_financial_transactions,
         message: {
@@ -60,7 +60,7 @@ class DataQueryService
         }
       )
 
-      res.to_hash[:staff_portal_get_financial_transactions_response][:staff_portal_get_financial_transactions_result][:financial_transactions][:financial_transaction]
+      res.to_hash[:staff_portal_get_financial_transactions_response][:staff_portal_get_financial_transactions_result]
     end
   end
 end
