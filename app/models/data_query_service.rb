@@ -34,7 +34,7 @@ class DataQueryService
   end
 
   def profiles
-    Rails.cache.fetch(['v1', @guid, 'profiles']) do
+    Rails.cache.fetch(['v1', @guid, @service, 'profiles']) do
       res = client.call(
         :my_web_user_get_info,
         message: {
@@ -42,12 +42,13 @@ class DataQueryService
         }
       )
 
-      Array.wrap(res.to_hash[:my_web_user_get_info_response][:my_web_user_get_info_result][:staff_profiles][:staff_profile_info])
+      profiles = res.to_hash[:my_web_user_get_info_response][:my_web_user_get_info_result][:staff_profiles]
+      Array.wrap(profiles ? profiles[:staff_profile_info] : [])
     end
   end
 
   def transactions(profile_code, date_from, date_to, account)
-    Rails.cache.fetch(['v3', @guid, profile_code, date_from, date_to, account, 'transactions']) do
+    Rails.cache.fetch(['v3', @guid, @service, profile_code, date_from, date_to, account, 'transactions']) do
       res = client.call(
         :staff_portal_get_financial_transactions,
         message: {
