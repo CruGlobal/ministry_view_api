@@ -26,6 +26,17 @@ class MinistryViewController < ApplicationController
     render json: res.to_json
   end
 
+  def donations
+    res = data_query_service.donations(
+      params[:profile_code],
+      params[:date_from],
+      params[:date_to],
+      params[:account]
+    )
+
+    render json: res.to_json
+  end
+
   private
 
   def cas_filter

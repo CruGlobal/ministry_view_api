@@ -64,4 +64,21 @@ class DataQueryService
       res.to_hash[:staff_portal_get_financial_transactions_response][:staff_portal_get_financial_transactions_result]
     end
   end
+
+  def donations(profile_code, date_from, date_to, account)
+    Rails.cache.fetch(['v1', @guid, @service, profile_code, date_from, date_to, account, 'transactions']) do
+      res = client.call(
+        :staff_portal_get_gifts_received,
+        message: {
+          session_i_d: session_id,
+          staff_profile_code: profile_code,
+          date_from: date_from,
+          date_to: date_to,
+          designation_filter: account
+        }
+      )
+      donations = res.to_hash[:staff_portal_get_gifts_received_response][:staff_portal_get_gifts_received_result] || {gift: []}
+      donations[:gift]
+    end
+  end
 end
