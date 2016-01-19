@@ -5,7 +5,7 @@ require File.expand_path('../rollbar', __FILE__)
 # Initialize the Rails application.
 begin
   Rails.application.initialize!
-rescue Exception => e
+rescue StandardError => e
   Rollbar.error(e)
   raise
 end

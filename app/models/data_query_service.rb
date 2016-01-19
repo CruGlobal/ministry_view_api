@@ -1,7 +1,6 @@
 require 'savon'
 
 class DataQueryService
-
   def initialize(service, guid, pgt)
     @service = service.sub('dataqueryservice.asmx', 'dataqueryservice2.asmx')
     @guid = guid
@@ -10,10 +9,10 @@ class DataQueryService
 
   def client
     @client ||= Savon.client(wsdl: "#{@service}?WSDL",
-                 logger: Rails.logger,
-                 log_level: Rails.application.config.log_level,
-                 log: Rails.env.development?,
-                 pretty_print_xml: true) do
+                             logger: Rails.logger,
+                             log_level: Rails.application.config.log_level,
+                             log: Rails.env.development?,
+                             pretty_print_xml: true) do
       convert_request_keys_to :camelcase
     end
   end
@@ -75,7 +74,8 @@ class DataQueryService
           designation_filter: account
         }
       )
-      donations = res.to_hash[:staff_portal_get_gifts_received_response][:staff_portal_get_gifts_received_result] || {gift: []}
+      donations = res.to_hash[:staff_portal_get_gifts_received_response][:staff_portal_get_gifts_received_result] ||
+                  { gift: [] }
       donations[:gift]
     end
   end

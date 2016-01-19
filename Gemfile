@@ -31,6 +31,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'rubocop'
 end
 
 group :test do
@@ -39,6 +40,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'factory_girl_rails'
   gem 'fakeredis', :require => 'fakeredis/rspec'
-  gem 'rubocop'
   gem 'coveralls', require: false
 end
