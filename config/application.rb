@@ -1,13 +1,13 @@
 require File.expand_path('../boot', __FILE__)
 
-require "rails"
+# require "rails"
 # Pick the frameworks you want:
-# require "active_model/railtie"
+require "active_model/railtie"
 # require "active_job/railtie"
 # require "active_record/railtie"
 require "action_controller/railtie"
 # require "action_mailer/railtie"
-require "action_view/railtie"
+# require "action_view/railtie"
 # require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -31,10 +31,21 @@ module MinistryViewApi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     # config.active_record.raise_in_transactional_callbacks = true
-    config.api_only = false
 
-    config.rubycas.cas_base_url = 'https://thekey.me/cas/'
-    config.rubycas.proxy_callback_url = 'https://mv.ngrok.io/cas_proxy_callback/receive_pgt'
+    config.middleware.insert_before 0, 'Rack::Cors' do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :post, :delete, :put, :patch, :options, :head],
+                 max_age: 0
+      end
+    end
+
+    config.log_formatter = ::Logger::Formatter.new
+
+    # RubyCAS config
+    config.rubycas.cas_base_url = ENV.fetch('CAS_BASE_URL')
     config.rubycas.logger = Rails.logger
   end
 end

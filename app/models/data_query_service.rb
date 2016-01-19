@@ -28,8 +28,6 @@ class DataQueryService
         auto_register: true
       }
     )
-
-    Rails.logger.debug(res.to_hash)
     res.to_hash[:auth_login_response][:auth_login_result][:session_id]
   end
 

@@ -1,9 +1,7 @@
 class MinistryViewController < ApplicationController
-  before_action :cas_filter
+  include CruLib::AccessTokenProtectedConcern
 
-  def index
-
-  end
+  before_action :authenticate_request
 
   def countries
     render json: PortalUsersService.new.countries(guid).to_json
@@ -39,15 +37,11 @@ class MinistryViewController < ApplicationController
 
   private
 
-  def cas_filter
-    RubyCAS::Filter.filter(self)
-  end
-
   def guid
-    session['cas_extra_attributes']['ssoGuid']
+    @access_token.guid
   end
 
   def data_query_service
-    DataQueryService.new(params[:portal_uri], guid, session[:cas_pgt])
+    DataQueryService.new(params[:portal_uri], guid, CASClient::ProxyGrantingTicket.new(@access_token.pgt, nil))
   end
 end
