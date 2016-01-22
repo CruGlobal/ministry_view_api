@@ -11,9 +11,9 @@ RSpec.describe MinistryViewController, type: :controller do
   after(:all) { savon.unmock! }
 
   describe 'GET #countries' do
-    before do
-      Rails.cache.clear
-    end
+    # before do
+    #   Rails.cache.clear
+    # end
     it 'responds successfully with HTTP 200 OK' do
       allow(controller).to receive(:authenticate_request).and_return(true)
       allow(controller).to receive(:guid).and_return('3719A628-9EFC-4D62-B019-0C7B8D066F55')
