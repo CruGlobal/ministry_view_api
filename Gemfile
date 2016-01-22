@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # gem 'rails'
 gem 'rails-api'
-gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git'
+gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
 gem 'versionist'
