@@ -21,11 +21,11 @@ gem 'rack-cors', require: 'rack/cors'
 
 group :development do
   gem 'better_errors'
-  gem 'awesome_print'
   gem 'spring'
 end
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'dotenv-rails'
   gem 'guard-rubocop'
   gem 'guard-rspec'
@@ -36,7 +36,6 @@ end
 
 group :test do
   gem 'webmock'
-  gem 'test_after_commit'
   gem 'simplecov', require: false
   gem 'factory_girl_rails'
   gem 'fakeredis', :require => 'fakeredis/rspec'

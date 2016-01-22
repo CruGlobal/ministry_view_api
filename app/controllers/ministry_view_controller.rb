@@ -9,7 +9,6 @@ class MinistryViewController < ApplicationController
 
   def profiles
     res = data_query_service.profiles
-
     render json: res.to_json
   end
 
@@ -41,7 +40,11 @@ class MinistryViewController < ApplicationController
     @access_token.guid
   end
 
+  def pgt
+    @access_token.pgt
+  end
+
   def data_query_service
-    DataQueryService.new(params[:portal_uri], guid, CASClient::ProxyGrantingTicket.new(@access_token.pgt, nil))
+    DataQueryService.new(params[:portal_uri], guid, CASClient::ProxyGrantingTicket.new(pgt, nil))
   end
 end

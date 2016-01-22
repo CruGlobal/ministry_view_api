@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetPortalsForUserResponse xmlns="http://tempuri.org/">
+            <GetPortalsForUserResult>
+                <DataserverPortalUser>
+                    <Id>6ae65c25-b107-4112-85b2-09c391c9eb63</Id>
+                    <SsoCode>3719a628-9efc-4d62-b019-0c7b8d066f55</SsoCode>
+                    <PortalUri>https://tntdataserver.eu/dataserver/uk/dataquery/dataqueryservice.asmx</PortalUri>
+                    <PortalName>Agape UK</PortalName>
+                </DataserverPortalUser>
+                <DataserverPortalUser>
+                    <Id>d4898561-4eec-4265-b712-1f849822b260</Id>
+                    <SsoCode>3719a628-9efc-4d62-b019-0c7b8d066f55</SsoCode>
+                    <PortalUri>https://tntdataserver.eu/dataserver/AgapeAOA/dataquery/dataqueryservice.asmx</PortalUri>
+                    <PortalName>Agape Europe AOA</PortalName>
+                </DataserverPortalUser>
+                <DataserverPortalUser>
+                    <Id>589897e0-5d97-4e38-a0a4-760553706656</Id>
+                    <SsoCode>3719a628-9efc-4d62-b019-0c7b8d066f55</SsoCode>
+                    <PortalUri>https://tntdataserver.eu/dataserver/mat/dataquery/dataqueryservice.asmx</PortalUri>
+                    <PortalName>Ministry Application Test</PortalName>
+                </DataserverPortalUser>
+            </GetPortalsForUserResult>
+        </GetPortalsForUserResponse>
+    </soap:Body>
+</soap:Envelope>
