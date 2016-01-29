@@ -1,7 +1,9 @@
 class MonitorsController < ApplicationController
+  layout nil
   newrelic_ignore
 
   def lb
-    render status: :ok, plain: 'OK'
+    render text: 'OK'
   end
 end
+

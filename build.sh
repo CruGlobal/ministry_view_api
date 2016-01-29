@@ -1,6 +1,8 @@
 #!/bin/bash
 
 bundle install --path vendor/bundle
+bundle binstub puma
+
 rc=$?
 if [ $rc -ne 0 ]; then
     echo -e "Bundle install failed"
