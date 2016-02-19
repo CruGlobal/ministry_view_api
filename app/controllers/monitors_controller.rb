@@ -5,4 +5,3 @@ class MonitorsController < ApplicationController
     render text: 'OK'
   end
 end
-
