@@ -37,7 +37,7 @@ class MinistryViewController < ApplicationController
   private
 
   def guid
-    @access_token.guid
+    @access_token.key_guid
   end
 
   def pgt
