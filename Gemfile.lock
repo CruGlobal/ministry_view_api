@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/CruGlobal/cru_lib.git
-  revision: 8da4a0abb7195c0ad4e23aaf26e55ead312c441a
-  specs:
-    cru_lib (0.0.6)
-      active_model_serializers
-      global_registry
-      redis
-
-GIT
   remote: https://github.com/rails-api/active_model_serializers.git
   revision: 8981683b9fa8d0bcff0e76b3702d699689b787b4
   specs:
@@ -81,6 +72,9 @@ GEM
       tins (~> 1.6.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    cru-auth-lib (0.1.0)
+      active_model_serializers (>= 0.10.0.rc1)
+      redis (~> 3.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
     dotenv (2.0.2)
@@ -100,12 +94,6 @@ GEM
     girl_friday (0.11.2)
       connection_pool (~> 1.0)
       rubinius-actor
-    global_registry (1.0.8)
-      activesupport
-      oj (~> 2.13.0)
-      oj_mimic_json
-      rest-client (~> 1.6.7)
-      retryable-rb (~> 1.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     guard (2.13.0)
@@ -203,7 +191,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    redis (3.2.2)
+    redis (3.3.3)
     redis-actionpack (4.0.1)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
@@ -224,7 +212,6 @@ GEM
       redis (>= 2.2)
     rest-client (1.6.9)
       mime-types (~> 1.16)
-    retryable-rb (1.1.0)
     rollbar (2.2.1)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
@@ -316,7 +303,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
   coveralls
-  cru_lib!
+  cru-auth-lib (~> 0.1.0)
   dotenv-rails
   factory_girl_rails
   fakeredis
@@ -344,4 +331,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.10.6
+   1.14.6
