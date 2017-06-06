@@ -1,5 +1,5 @@
 class MinistryViewController < ApplicationController
-  include CruLib::AccessTokenProtectedConcern
+  include CruAuthLib::AccessTokenProtectedConcern
 
   before_action :authenticate_request
 

@@ -13,6 +13,8 @@
 /tmp
 
 vendor/ruby
+vendor/bundle
+vendor/ruby
 .idea
 *.iml
 
