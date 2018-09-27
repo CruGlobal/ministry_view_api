@@ -28,7 +28,6 @@ RSpec.describe MinistryViewController, type: :controller do
                          sso_code: '3719A628-9EFC-4D62-B019-0C7B8D066F55' })
         .returns(File.read('spec/fixtures/portal_users_service/get_portals_for_user.xml'))
 
-      Rails.cache.clear
       get :countries
       expect(response).to have_http_status(200)
       json = JSON.parse(response.body)
