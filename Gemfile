@@ -18,6 +18,7 @@ gem 'rollbar'
 gem 'girl_friday'
 gem 'savon', '~> 2.11.0'
 gem 'rack-cors', require: 'rack/cors'
+gem 'ddtrace'
 
 group :development do
   gem 'better_errors'
