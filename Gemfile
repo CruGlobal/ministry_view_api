@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.10'
-gem 'rails-api'
+gem 'rails', '5.0.7'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
