@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 # Pick the frameworks you want:
 require 'active_model/railtie'
@@ -16,7 +16,6 @@ Bundler.require(*Rails.groups)
 
 module MinistryViewApi
   class Application < Rails::Application
-    config.assets.enabled = false
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.view_specs false
@@ -26,7 +25,7 @@ module MinistryViewApi
       g.javascripts false
     end
 
-    config.middleware.insert_before 0, 'Rack::Cors' do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*',
