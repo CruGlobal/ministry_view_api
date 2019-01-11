@@ -1,8 +1,13 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 gem 'rails', '5.0.7'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
-gem 'puma'
+gem 'puma', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'versionist'
 gem 'redis-namespace'
